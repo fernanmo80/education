@@ -1,0 +1,21 @@
+Fri May 10 09:08:32.047 [mongosMain] MongoS version 2.4.1 starting: pid=2161 port=27017 64-bit host=Susans-MacBook-Air.local (--help for usage)
+Fri May 10 09:08:32.047 [mongosMain] git version: 1560959e9ce11a693be8b4d0d160d633eee75110
+Fri May 10 09:08:32.047 [mongosMain] build info: Darwin bs-osx-106-x86-64-1.local 10.8.0 Darwin Kernel Version 10.8.0: Tue Jun  7 16:33:36 PDT 2011; root:xnu-1504.15.3~1/RELEASE_I386 i386 BOOST_LIB_VERSION=1_49
+Fri May 10 09:08:32.047 [mongosMain] options: { configdb: "localhost:57040,localhost:57041,localhost:57042", fork: true, logpath: "mongos-1.log", port: 27017 }
+Fri May 10 09:08:32.051 [mongosMain] warning:  couldn't check on config server:localhost:57041 ok for now : 11002 socket exception [6] server [localhost:57041] mongos connectionpool error: couldn't connect to server localhost:57041
+Fri May 10 09:08:32.052 [mongosMain] warning:  couldn't check on config server:localhost:57042 ok for now : 11002 socket exception [6] server [localhost:57042] mongos connectionpool error: couldn't connect to server localhost:57042
+Fri May 10 09:08:32.052 [mongosMain] warning: only 1 config server reachable, continuing
+Fri May 10 09:08:32.052 [mongosMain] SyncClusterConnection connecting to [localhost:57040]
+Fri May 10 09:08:32.053 [mongosMain] SyncClusterConnection connecting to [localhost:57041]
+Fri May 10 09:08:32.053 [mongosMain] SyncClusterConnection connect fail to: localhost:57041 errmsg: couldn't connect to server localhost:57041
+Fri May 10 09:08:32.053 [mongosMain] SyncClusterConnection connecting to [localhost:57042]
+Fri May 10 09:08:32.054 [CheckConfigServers] warning:  couldn't check on config server:localhost:57041 ok for now : 11002 socket exception [6] server [localhost:57041] mongos connectionpool error: couldn't connect to server localhost:57041
+Fri May 10 09:08:32.054 [CheckConfigServers] warning:  couldn't check on config server:localhost:57042 ok for now : 11002 socket exception [6] server [localhost:57042] mongos connectionpool error: couldn't connect to server localhost:57042
+Fri May 10 09:08:32.054 [CheckConfigServers] warning: only 1 config server reachable, continuing
+Fri May 10 09:08:32.054 [mongosMain] SyncClusterConnection connect fail to: localhost:57042 errmsg: couldn't connect to server localhost:57042
+Fri May 10 09:08:32.066 [mongosMain] trying reconnect to localhost:57041
+Fri May 10 09:08:32.066 [mongosMain] reconnect localhost:57041 failed couldn't connect to server localhost:57041
+Fri May 10 09:08:32.066 [mongosMain] trying reconnect to localhost:57042
+Fri May 10 09:08:32.066 [mongosMain] reconnect localhost:57042 failed couldn't connect to server localhost:57042
+Fri May 10 09:08:32.067 [mongosMain] scoped connection to localhost:57040,localhost:57041,localhost:57042 not being returned to the pool
+Fri May 10 09:08:32.067 [mongosMain] ERROR: error upgrading config database to v4 :: caused by :: all config servers must be reachable for initial config database creation :: caused by :: 9001 socket exception [6] server [localhost:57041]  localhost:57041:{}9001 socket exception [6] server [localhost:57042]  localhost:57042:{}
