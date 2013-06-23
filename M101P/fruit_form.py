@@ -7,8 +7,8 @@ import bottle
 def home_page():
   mythings = [ 'apple', 'orange', 'banana', 'peach' ]
   # return bottle.template('hello_world', username='Michael', things=mythings)
-  return bottle.template('hello_world', { 'username' :'Michael', 'things' : mythings} )
-
+  #return bottle.template('hello_world', { 'username' :'Michael', 'things' : mythings} )
+  return bottle.template('show_fruit', { 'username' :'Fernando', 'things' : mythings} )
 @bottle.post('/favorite_fruit')
 def favorite_fruit():
   fruit = bottle.request.forms.get("fruit")

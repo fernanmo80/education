@@ -8,7 +8,7 @@ import pymongo
 def home_page():
   mythings = [ 'apple', 'orange', 'banana', 'peach' ]
   # return bottle.template('hello_world', username='Michael', things=mythings)
-  return bottle.template('hello_world', { 'username' :'Michael', 'things' : mythings} )
+  return bottle.template('hello_world', { 'username' :'Fernando', 'things' : mythings} )
 
 @bottle.route('/testpage')
 def testpage():

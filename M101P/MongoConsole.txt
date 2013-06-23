@@ -1,0 +1,411 @@
+> db.names.find()
+{ "_id" : ObjectId("51c35842e45f27d8119b80c5"), "name" : "Fernando" }
+{ "_id" : ObjectId("51c35939dde23b426c42fd1c"), "name" : "Alonso" }
+{ "_id" : ObjectId("51c359e1dde23b424c8405de"), "name" : "Alonso" }
+{ "_id" : ObjectId("51c359fedde23b43a0d880d1"), "name" : "Alonso" }
+{ "_id" : ObjectId("51c35a05dde23b4480090fb8"), "name" : "Alonso" }
+{ "_id" : ObjectId("51c35a0bdde23b2c7c0ae83b"), "name" : "Alonso" }
+> var j = d.names.findOne()
+Thu Jun 20 16:03:04.486 JavaScript execution failed: ReferenceError: d is not de
+fined
+> j
+> var j = db.names.findOne()
+> j
+{ "_id" : ObjectId("51c35842e45f27d8119b80c5"), "name" : "Fernando" }
+> j.name = "Agustin"
+Agustin
+> db.names.save(j)
+> db.names.find()
+{ "_id" : ObjectId("51c35842e45f27d8119b80c5"), "name" : "Agustin" }
+{ "_id" : ObjectId("51c35939dde23b426c42fd1c"), "name" : "Alonso" }
+{ "_id" : ObjectId("51c359e1dde23b424c8405de"), "name" : "Alonso" }
+{ "_id" : ObjectId("51c359fedde23b43a0d880d1"), "name" : "Alonso" }
+{ "_id" : ObjectId("51c35a05dde23b4480090fb8"), "name" : "Alonso" }
+{ "_id" : ObjectId("51c35a0bdde23b2c7c0ae83b"), "name" : "Alonso" }
+> exit
+bye
+
+C:\mongodb2_2>mongo
+MongoDB shell version: 2.4.4
+connecting to: test
+> db.test.save
+function ( obj ){
+    if ( obj == null || typeof( obj ) == "undefined" )
+        throw "can't save a null";
+
+    if ( typeof( obj ) == "number" || typeof( obj) == "string" )
+        throw "can't save a number or string"
+
+    if ( typeof( obj._id ) == "undefined" ){
+        obj._id = new ObjectId();
+        return this.insert( obj );
+    }
+    else {
+        return this.update( { _id : obj._id } , obj , true );
+    }
+}
+>
+> db.users.save({name:'Fernando Morelli', city:'Santiago'})
+> db.users.find()
+{ "_id" : ObjectId("51c484d8a30005208aeb239b"), "name" : "Fernando Morelli", "ci
+ty" : "Santiago" }
+> db.users.find().pretty()
+{
+        "_id" : ObjectId("51c484d8a30005208aeb239b"),
+        "name" : "Fernando Morelli",
+        "city" : "Santiago"
+}
+> db.users.save({name:'Benajamin Morelli', city:'Santiago', favorite_coler:'whit
+e'})
+> db.users.find().pretty()
+{
+        "_id" : ObjectId("51c484d8a30005208aeb239b"),
+        "name" : "Fernando Morelli",
+        "city" : "Santiago"
+}
+{
+        "_id" : ObjectId("51c4855ca30005208aeb239c"),
+        "name" : "Benajamin Morelli",
+        "city" : "Santiago",
+        "favorite_coler" : "white"
+}
+> var j = db.users.findOne({'name':'Fernando Morelli'})
+> j
+{
+        "_id" : ObjectId("51c484d8a30005208aeb239b"),
+        "name" : "Fernando Morelli",
+        "city" : "Santiago"
+}
+> j.favorite_coler = 'Black'
+Black
+> j
+{
+        "_id" : ObjectId("51c484d8a30005208aeb239b"),
+        "name" : "Fernando Morelli",
+        "city" : "Santiago",
+        "favorite_coler" : "Black"
+}
+> db.users.save()
+Fri Jun 21 12:58:09.251 JavaScript execution failed: can't save a null at src/mo
+ngo/shell/collection.js:L250
+> db.users.save(j)
+> db.users.find().pretty()
+{
+        "_id" : ObjectId("51c4855ca30005208aeb239c"),
+        "name" : "Benajamin Morelli",
+        "city" : "Santiago",
+        "favorite_coler" : "white"
+}
+{
+        "_id" : ObjectId("51c484d8a30005208aeb239b"),
+        "name" : "Fernando Morelli",
+        "city" : "Santiago",
+        "favorite_coler" : "Black"
+}
+>
+
+> exit
+bye
+
+C:\mongodb2_2>mongo
+MongoDB shell version: 2.4.4
+connecting to: test
+> use m101
+switched to db m101
+> db.people.find()
+{ "_id" : ObjectId("51c719c8dde23b12bc32cafe"), "interests" : [  "government",
+"basketball",  "the Middle East" ], "role" : "President", "name" : "Barack Obama
+", "address" : { "address1" : "The White House", "state" : "DC", "street" : "160
+0 Pennsylvania Ave.", "city" : "Washington" } }
+{ "_id" : ObjectId("51c71a29dde23b1ffc549808"), "interests" : [  "government",
+"basketball",  "the Middle East" ], "role" : "President", "name" : "Barack Obama
+", "address" : { "address1" : "The White House", "state" : "DC", "street" : "160
+0 Pennsylvania Ave.", "city" : "Washington" } }
+{ "_id" : ObjectId("51c71a7ddde23b252481aa7e"), "interests" : [  "government",
+"basketball",  "the Middle East" ], "role" : "President", "name" : "Barack Obama
+", "address" : { "address1" : "The White House", "state" : "DC", "street" : "160
+0 Pennsylvania Ave.", "city" : "Washington" } }
+>
+
+> db.people.find().pretty()
+{
+        "_id" : ObjectId("51c719c8dde23b12bc32cafe"),
+        "interests" : [
+                "government",
+                "basketball",
+                "the Middle East"
+        ],
+        "role" : "President",
+        "name" : "Barack Obama",
+        "address" : {
+                "address1" : "The White House",
+                "state" : "DC",
+                "street" : "1600 Pennsylvania Ave.",
+                "city" : "Washington"
+        }
+}
+{
+        "_id" : ObjectId("51c71a29dde23b1ffc549808"),
+        "interests" : [
+                "government",
+                "basketball",
+                "the Middle East"
+        ],
+        "role" : "President",
+        "name" : "Barack Obama",
+        "address" : {
+                "address1" : "The White House",
+                "state" : "DC",
+                "street" : "1600 Pennsylvania Ave.",
+                "city" : "Washington"
+        }
+}
+{
+        "_id" : ObjectId("51c71a7ddde23b252481aa7e"),
+        "interests" : [
+                "government",
+                "basketball",
+                "the Middle East"
+        ],
+        "role" : "President",
+        "name" : "Barack Obama",
+        "address" : {
+                "address1" : "The White House",
+                "state" : "DC",
+                "street" : "1600 Pennsylvania Ave.",
+                "city" : "Washington"
+        }
+}
+>
+
+> show collections
+names
+system.indexes
+users
+>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

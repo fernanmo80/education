@@ -1,0 +1,118 @@
+
+C:\mongodb2_2>python
+Python 2.7.5 (default, May 15 2013, 22:43:36) [MSC v.1500 32 bit (Intel)] on win
+32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> print ("Hello, World!")
+Hello, World!
+>>> print ("Hello World!")
+Hello World!
+>>> print ("Hello " + " Fernando Morelli")
+Hello  Fernando Morelli
+>>> a = ['apple', 'pear', 'banana']
+>>> a
+['apple', 'pear', 'banana']
+>>> print(a)
+['apple', 'pear', 'banana']
+>>> b = [1,2,3]
+>>> b
+[1, 2, 3]
+>>> c = ^[
+  File "<stdin>", line 1
+    c = ^[
+        ^
+SyntaxError: invalid syntax
+>>>
+>>> c = [1,['apple','pear','banana'],3]
+>>> c
+[1, ['apple', 'pear', 'banana'], 3]
+>>> print c[0]
+1
+>>> print c[1]
+['apple', 'pear', 'banana']
+>>> print c[2]
+3
+>>> a
+['apple', 'pear', 'banana']
+>>> a.append('kiwi')
+>>> a
+['apple', 'pear', 'banana', 'kiwi']
+>>> a[1] = 'grape'
+>>> a
+['apple', 'grape', 'banana', 'kiwi']
+>>> del a[2]
+>>> a
+['apple', 'grape', 'kiwi']
+>>> dir(a)
+['__add__', '__class__', '__contains__', '__delattr__', '__delitem__', '__delsli
+ce__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getit
+em__', '__getslice__', '__gt__', '__hash__', '__iadd__', '__imul__', '__init__',
+ '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__r
+educe__', '__reduce_ex__', '__repr__', '__reversed__', '__rmul__', '__setattr__'
+, '__setitem__', '__setslice__', '__sizeof__', '__str__', '__subclasshook__', 'a
+ppend', 'count', 'extend', 'index', 'insert', 'pop', 'remove', 'reverse', 'sort'
+]
+>>> a =[0,1,2,3,4,5]
+>>> a[0:3]
+[0, 1, 2]
+>>> a[2:3]
+[2]
+>>> a[2:]
+[2, 3, 4, 5]
+>>> a[:6]
+[0, 1, 2, 3, 4, 5]
+>>> a[:]
+[0, 1, 2, 3, 4, 5]
+>>> a = ['apple','pear','orange']
+>>> 'pear' in a
+True
+>>> 'grape' in a
+False
+>>> if 'pear' in a:
+... print ("There is a pear")
+  File "<stdin>", line 2
+    print ("There is a pear")
+        ^
+IndentationError: expected an indented block
+>>> if 'pear' in a:
+... print("There is a pear")
+  File "<stdin>", line 2
+    print("There is a pear")
+        ^
+IndentationError: expected an indented block
+>>> if 'pear' in a:
+...     print ("There is a pear")
+...
+There is a pear
+>>> if 'grape' in a:
+...     print("There is a grape")
+...
+>>> g = {'name': 'Fernando Morelli', 'city_of_birth': 'Santiago'}
+>>> g
+{'city_of_birth': 'Santiago', 'name': 'Fernando Morelli'}
+>>> g['name']
+'Fernando Morelli'
+>>> g['name'] = "Benjamin Erlichson"
+>>> g
+{'city_of_birth': 'Santiago', 'name': 'Benjamin Erlichson'}
+>>> g.keys()
+['city_of_birth', 'name']
+>>> del(g['name'])
+>>> del(g['foo'])
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+KeyError: 'foo'
+>>> 'city_of_birth' in g
+True
+>>> 'name' in g
+False
+>>> a = {'name': 'Fernando Morelli','interests':['cycling','running','golf']}
+>>> a
+{'interests': ['cycling', 'running', 'golf'], 'name': 'Fernando Morelli'}
+>>> a['interests'][1]
+'running'
+>>> a['interests'].append('swimming')
+>>> a
+{'interests': ['cycling', 'running', 'golf', 'swimming'], 'name': 'Fernando More
+lli'}
+>>>
