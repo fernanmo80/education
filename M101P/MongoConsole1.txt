@@ -1,0 +1,552 @@
+
+C:\mongodb2_2>mongo
+MongoDB shell version: 2.4.4
+connecting to: test
+> for (i=0;i<2;i++) print("hello,MongoDB developer!");
+hello,MongoDB developer!
+hello,MongoDB developer!
+> for (i=0;i<2;i++) print("hello,MongoDB developer!" + i);
+hello,MongoDB developer!0
+hello,MongoDB developer!1
+> for (i=10;i<13;i++) print("hello,MongoDB developer!" + i);
+hello,MongoDB developer!10
+hello,MongoDB developer!11
+hello,MongoDB developer!12
+> help
+        db.help()                    help on db methods
+        db.mycoll.help()             help on collection methods
+        sh.help()                    sharding helpers
+        rs.help()                    replica set helpers
+        help admin                   administrative help
+        help connect                 connecting to a db help
+        help keys                    key shortcuts
+        help misc                    misc things to know
+        help mr                      mapreduce
+
+        show dbs                     show database names
+        show collections             show collections in current database
+        show users                   show users in current database
+        show profile                 show most recent system.profile entries wit
+h time >= 1ms
+        show logs                    show the accessible logger names
+        show log [name]              prints out the last segment of log in memor
+y, 'global' is default
+        use <db_name>                set current database
+        db.foo.find()                list objects in collection foo
+        db.foo.find( { a : 1 } )     list objects in foo where a == 1
+        it                           result of the last line evaluated; use to f
+urther iterate
+        DBQuery.shellBatchSize = x   set default number of items to display on s
+hell
+        exit                         quit the mongo shell
+> for (i=10;i<13;i++) print(i);
+10
+11
+12
+> x = 1
+1
+> y = "abc"
+abc
+> z = { a : 1 }
+{ "a" : 1 }
+> z.a
+1
+> z["a"]
+1
+> w = "a"
+a
+> z[w]
+1
+>
+
+> obj = { "a" : 1 , "b" : "hello" , "c" : ["apples","tomatoes"] }
+{ "a" : 1, "b" : "hello", "c" : [ "apples", "tomatoes" ] }
+> NumberInt(1)
+NumberInt(1)
+> NumberLong(1)
+NumberLong(1)
+> NumberLong(1)+NumberLong(3)
+4
+> new Date()
+ISODate("2013-06-25T16:15:37.838Z")
+> obj = { "a" : 1 , "b" : ISODate("2013-06-25T16:15:37.838Z") , "c" : NumberLong
+(42)}
+{ "a" : 1, "b" : ISODate("2013-06-25T16:15:37.838Z"), "c" : NumberLong(42) }
+>
+
+> doc = {"name" : "Smith" , "age" : 30, "profession" : "hacker" }
+{ "name" : "Smith", "age" : 30, "profession" : "hacker" }
+> db
+test
+> db.people.in
+db.people.indexStats(  db.people.insert(
+> db.people.insert( doc )
+> db.people.find()
+{ "_id" : ObjectId("51c9f969ee1709f878751de9"), "name" : "Smith", "age" : 30, "p
+rofession" : "hacker" }
+> db.people.insert( {"name" : "Fernando Morelli", "age" : 32, "profession" : "ar
+chitect" } )
+> db.people.find()
+{ "_id" : ObjectId("51c9f969ee1709f878751de9"), "name" : "Smith", "age" : 30, "p
+rofession" : "hacker" }
+{ "_id" : ObjectId("51c9fb11ee1709f878751dea"), "name" : "Fernando Morelli", "ag
+e" : 32, "profession" : "architect" }
+> db.people.findOne()
+{
+        "_id" : ObjectId("51c9f969ee1709f878751de9"),
+        "name" : "Smith",
+        "age" : 30,
+        "profession" : "hacker"
+}
+> db.people.findOne({ "name" : "Fernando Morelli"})
+{
+        "_id" : ObjectId("51c9fb11ee1709f878751dea"),
+        "name" : "Fernando Morelli",
+        "age" : 32,
+        "profession" : "architect"
+}
+> db.people.findOne({ "name" : "Fernando Morelli"}, {"name" : true, "_id" : fals
+e})
+{ "name" : "Fernando Morelli" }
+> db.people.findOne({ "name" : "Fernando Morelli"}, {"name" : true })
+{ "_id" : ObjectId("51c9fb11ee1709f878751dea"), "name" : "Fernando Morelli" }
+> db.people.findOne({ "name" : "Fernando Morelli"}, {"_id" : false, "age" : true
+ })
+{ "age" : 32 }
+> for (i=0; i<1000;i++) { names=["exam","essay","quiz"]; for(j=0;j<3;j++){ db.sc
+ores.insert ( {"student" : i, "type" : names[j], score : Math.round(Math.random(
+)*100) } ); }}
+> db.scores.find()
+{ "_id" : ObjectId("51ca011bee1709f87875355b"), "student" : 0, "type" : "exam",
+"score" : 91 }
+{ "_id" : ObjectId("51ca011bee1709f87875355c"), "student" : 0, "type" : "essay",
+ "score" : 25 }
+{ "_id" : ObjectId("51ca011bee1709f87875355d"), "student" : 0, "type" : "quiz",
+"score" : 8 }
+{ "_id" : ObjectId("51ca011bee1709f87875355e"), "student" : 1, "type" : "exam",
+"score" : 99 }
+{ "_id" : ObjectId("51ca011bee1709f87875355f"), "student" : 1, "type" : "essay",
+ "score" : 12 }
+{ "_id" : ObjectId("51ca011bee1709f878753560"), "student" : 1, "type" : "quiz",
+"score" : 64 }
+{ "_id" : ObjectId("51ca011bee1709f878753561"), "student" : 2, "type" : "exam",
+"score" : 5 }
+{ "_id" : ObjectId("51ca011bee1709f878753562"), "student" : 2, "type" : "essay",
+ "score" : 67 }
+{ "_id" : ObjectId("51ca011bee1709f878753563"), "student" : 2, "type" : "quiz",
+"score" : 6 }
+{ "_id" : ObjectId("51ca011bee1709f878753564"), "student" : 3, "type" : "exam",
+"score" : 38 }
+{ "_id" : ObjectId("51ca011bee1709f878753565"), "student" : 3, "type" : "essay",
+ "score" : 58 }
+{ "_id" : ObjectId("51ca011bee1709f878753566"), "student" : 3, "type" : "quiz",
+"score" : 75 }
+{ "_id" : ObjectId("51ca011bee1709f878753567"), "student" : 4, "type" : "exam",
+"score" : 38 }
+{ "_id" : ObjectId("51ca011bee1709f878753568"), "student" : 4, "type" : "essay",
+ "score" : 82 }
+{ "_id" : ObjectId("51ca011bee1709f878753569"), "student" : 4, "type" : "quiz",
+"score" : 86 }
+{ "_id" : ObjectId("51ca011bee1709f87875356a"), "student" : 5, "type" : "exam",
+"score" : 13 }
+{ "_id" : ObjectId("51ca011bee1709f87875356b"), "student" : 5, "type" : "essay",
+ "score" : 57 }
+{ "_id" : ObjectId("51ca011bee1709f87875356c"), "student" : 5, "type" : "quiz",
+"score" : 17 }
+{ "_id" : ObjectId("51ca011bee1709f87875356d"), "student" : 6, "type" : "exam",
+"score" : 41 }
+{ "_id" : ObjectId("51ca011bee1709f87875356e"), "student" : 6, "type" : "essay",
+ "score" : 89 }
+Type "it" for more
+>
+> db.scores.find().pretty()
+{
+        "_id" : ObjectId("51ca011bee1709f87875355b"),
+        "student" : 0,
+        "type" : "exam",
+        "score" : 91
+}
+{
+        "_id" : ObjectId("51ca011bee1709f87875355c"),
+        "student" : 0,
+        "type" : "essay",
+        "score" : 25
+}
+{
+        "_id" : ObjectId("51ca011bee1709f87875355d"),
+        "student" : 0,
+        "type" : "quiz",
+        "score" : 8
+}
+{
+        "_id" : ObjectId("51ca011bee1709f87875355e"),
+        "student" : 1,
+        "type" : "exam",
+        "score" : 99
+}
+{
+        "_id" : ObjectId("51ca011bee1709f87875355f"),
+        "student" : 1,
+        "type" : "essay",
+        "score" : 12
+}
+{
+        "_id" : ObjectId("51ca011bee1709f878753560"),
+        "student" : 1,
+        "type" : "quiz",
+        "score" : 64
+}
+{
+        "_id" : ObjectId("51ca011bee1709f878753561"),
+        "student" : 2,
+        "type" : "exam",
+        "score" : 5
+}
+{
+        "_id" : ObjectId("51ca011bee1709f878753562"),
+        "student" : 2,
+        "type" : "essay",
+        "score" : 67
+}
+{
+        "_id" : ObjectId("51ca011bee1709f878753563"),
+        "student" : 2,
+        "type" : "quiz",
+        "score" : 6
+}
+{
+        "_id" : ObjectId("51ca011bee1709f878753564"),
+        "student" : 3,
+        "type" : "exam",
+        "score" : 38
+}
+{
+        "_id" : ObjectId("51ca011bee1709f878753565"),
+        "student" : 3,
+        "type" : "essay",
+        "score" : 58
+}
+{
+        "_id" : ObjectId("51ca011bee1709f878753566"),
+        "student" : 3,
+        "type" : "quiz",
+        "score" : 75
+}
+{
+        "_id" : ObjectId("51ca011bee1709f878753567"),
+        "student" : 4,
+        "type" : "exam",
+        "score" : 38
+}
+{
+        "_id" : ObjectId("51ca011bee1709f878753568"),
+        "student" : 4,
+        "type" : "essay",
+        "score" : 82
+}
+{
+        "_id" : ObjectId("51ca011bee1709f878753569"),
+        "student" : 4,
+        "type" : "quiz",
+        "score" : 86
+}
+{
+        "_id" : ObjectId("51ca011bee1709f87875356a"),
+        "student" : 5,
+        "type" : "exam",
+        "score" : 13
+}
+{
+        "_id" : ObjectId("51ca011bee1709f87875356b"),
+        "student" : 5,
+        "type" : "essay",
+        "score" : 57
+}
+{
+        "_id" : ObjectId("51ca011bee1709f87875356c"),
+        "student" : 5,
+        "type" : "quiz",
+        "score" : 17
+}
+{
+        "_id" : ObjectId("51ca011bee1709f87875356d"),
+        "student" : 6,
+        "type" : "exam",
+        "score" : 41
+}
+{
+        "_id" : ObjectId("51ca011bee1709f87875356e"),
+        "student" : 6,
+        "type" : "essay",
+        "score" : 89
+}
+Type "it" for more
+>
+
+> db.scores.find({"type": "essay"})
+{ "_id" : ObjectId("51ca011bee1709f87875355c"), "student" : 0, "type" : "essay",
+ "score" : 25 }
+{ "_id" : ObjectId("51ca011bee1709f87875355f"), "student" : 1, "type" : "essay",
+ "score" : 12 }
+{ "_id" : ObjectId("51ca011bee1709f878753562"), "student" : 2, "type" : "essay",
+ "score" : 67 }
+{ "_id" : ObjectId("51ca011bee1709f878753565"), "student" : 3, "type" : "essay",
+ "score" : 58 }
+{ "_id" : ObjectId("51ca011bee1709f878753568"), "student" : 4, "type" : "essay",
+ "score" : 82 }
+{ "_id" : ObjectId("51ca011bee1709f87875356b"), "student" : 5, "type" : "essay",
+ "score" : 57 }
+{ "_id" : ObjectId("51ca011bee1709f87875356e"), "student" : 6, "type" : "essay",
+ "score" : 89 }
+{ "_id" : ObjectId("51ca011bee1709f878753571"), "student" : 7, "type" : "essay",
+ "score" : 8 }
+{ "_id" : ObjectId("51ca011bee1709f878753574"), "student" : 8, "type" : "essay",
+ "score" : 2 }
+{ "_id" : ObjectId("51ca011bee1709f878753577"), "student" : 9, "type" : "essay",
+ "score" : 76 }
+{ "_id" : ObjectId("51ca011bee1709f87875357a"), "student" : 10, "type" : "essay"
+, "score" : 19 }
+{ "_id" : ObjectId("51ca011bee1709f87875357d"), "student" : 11, "type" : "essay"
+, "score" : 60 }
+{ "_id" : ObjectId("51ca011bee1709f878753580"), "student" : 12, "type" : "essay"
+, "score" : 5 }
+{ "_id" : ObjectId("51ca011bee1709f878753583"), "student" : 13, "type" : "essay"
+, "score" : 63 }
+{ "_id" : ObjectId("51ca011bee1709f878753586"), "student" : 14, "type" : "essay"
+, "score" : 57 }
+{ "_id" : ObjectId("51ca011bee1709f878753589"), "student" : 15, "type" : "essay"
+, "score" : 35 }
+{ "_id" : ObjectId("51ca011bee1709f87875358c"), "student" : 16, "type" : "essay"
+, "score" : 50 }
+{ "_id" : ObjectId("51ca011bee1709f87875358f"), "student" : 17, "type" : "essay"
+, "score" : 56 }
+{ "_id" : ObjectId("51ca011bee1709f878753592"), "student" : 18, "type" : "essay"
+, "score" : 32 }
+{ "_id" : ObjectId("51ca011bee1709f878753595"), "student" : 19, "type" : "essay"
+, "score" : 17 }
+Type "it" for more
+> db.scores.find({"student": 19})
+{ "_id" : ObjectId("51ca011bee1709f878753594"), "student" : 19, "type" : "exam",
+ "score" : 71 }
+{ "_id" : ObjectId("51ca011bee1709f878753595"), "student" : 19, "type" : "essay"
+, "score" : 17 }
+{ "_id" : ObjectId("51ca011bee1709f878753596"), "student" : 19, "type" : "quiz",
+ "score" : 92 }
+> db.scores.find({"student": 19, "type": "essay"})
+{ "_id" : ObjectId("51ca011bee1709f878753595"), "student" : 19, "type" : "essay"
+, "score" : 17 }
+> db.scores.find({"student": 19, "type": "essay"}, {"score": true , "_id": false
+})
+{ "score" : 17 }
+>
+> db.scores.find( {"score": { $gt : 95 } })
+{ "_id" : ObjectId("51ca011bee1709f87875355e"), "student" : 1, "type" : "exam",
+"score" : 99 }
+{ "_id" : ObjectId("51ca011bee1709f878753593"), "student" : 18, "type" : "quiz",
+ "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f8787535b4"), "student" : 29, "type" : "quiz",
+ "score" : 96 }
+{ "_id" : ObjectId("51ca011bee1709f8787535c5"), "student" : 35, "type" : "essay"
+, "score" : 99 }
+{ "_id" : ObjectId("51ca011bee1709f8787535c7"), "student" : 36, "type" : "exam",
+ "score" : 99 }
+{ "_id" : ObjectId("51ca011bee1709f8787535cf"), "student" : 38, "type" : "quiz",
+ "score" : 96 }
+{ "_id" : ObjectId("51ca011bee1709f878753618"), "student" : 63, "type" : "exam",
+ "score" : 98 }
+{ "_id" : ObjectId("51ca011bee1709f87875363f"), "student" : 76, "type" : "exam",
+ "score" : 100 }
+{ "_id" : ObjectId("51ca011bee1709f878753645"), "student" : 78, "type" : "exam",
+ "score" : 99 }
+{ "_id" : ObjectId("51ca011bee1709f87875367c"), "student" : 96, "type" : "essay"
+, "score" : 99 }
+{ "_id" : ObjectId("51ca011bee1709f8787536a3"), "student" : 109, "type" : "essay
+", "score" : 100 }
+{ "_id" : ObjectId("51ca011bee1709f8787536cf"), "student" : 124, "type" : "exam"
+, "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f8787536d0"), "student" : 124, "type" : "essay
+", "score" : 98 }
+{ "_id" : ObjectId("51ca011bee1709f878753700"), "student" : 140, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f87875371f"), "student" : 150, "type" : "quiz"
+, "score" : 99 }
+{ "_id" : ObjectId("51ca011bee1709f87875373d"), "student" : 160, "type" : "quiz"
+, "score" : 99 }
+{ "_id" : ObjectId("51ca011bee1709f878753760"), "student" : 172, "type" : "essay
+", "score" : 96 }
+{ "_id" : ObjectId("51ca011bee1709f8787537a8"), "student" : 196, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f8787537d5"), "student" : 211, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f8787537f2"), "student" : 221, "type" : "exam"
+, "score" : 98 }
+Type "it" for more
+> db.scores.find( {"score": { $gt : 95 }, "type": "essay" })
+{ "_id" : ObjectId("51ca011bee1709f8787535c5"), "student" : 35, "type" : "essay"
+, "score" : 99 }
+{ "_id" : ObjectId("51ca011bee1709f87875367c"), "student" : 96, "type" : "essay"
+, "score" : 99 }
+{ "_id" : ObjectId("51ca011bee1709f8787536a3"), "student" : 109, "type" : "essay
+", "score" : 100 }
+{ "_id" : ObjectId("51ca011bee1709f8787536d0"), "student" : 124, "type" : "essay
+", "score" : 98 }
+{ "_id" : ObjectId("51ca011bee1709f878753700"), "student" : 140, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f878753760"), "student" : 172, "type" : "essay
+", "score" : 96 }
+{ "_id" : ObjectId("51ca011bee1709f8787537a8"), "student" : 196, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f8787537d5"), "student" : 211, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f878753841"), "student" : 247, "type" : "essay
+", "score" : 100 }
+{ "_id" : ObjectId("51ca011bee1709f8787538cb"), "student" : 293, "type" : "essay
+", "score" : 96 }
+{ "_id" : ObjectId("51ca011bee1709f8787538f2"), "student" : 306, "type" : "essay
+", "score" : 98 }
+{ "_id" : ObjectId("51ca011bee1709f878753964"), "student" : 344, "type" : "essay
+", "score" : 99 }
+{ "_id" : ObjectId("51ca011bee1709f8787539a3"), "student" : 365, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f8787539f1"), "student" : 391, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f878753a2d"), "student" : 411, "type" : "essay
+", "score" : 96 }
+{ "_id" : ObjectId("51ca011bee1709f878753a3f"), "student" : 417, "type" : "essay
+", "score" : 98 }
+{ "_id" : ObjectId("51ca011bee1709f878753a54"), "student" : 424, "type" : "essay
+", "score" : 96 }
+{ "_id" : ObjectId("51ca011bee1709f878753a9c"), "student" : 448, "type" : "essay
+", "score" : 100 }
+{ "_id" : ObjectId("51ca011bee1709f878753ac6"), "student" : 462, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f878753b20"), "student" : 492, "type" : "essay
+", "score" : 98 }
+Type "it" for more
+> db.scores.find( {"score": { $gt : 95 ,$lt : 98 }, "type": "essay" })
+{ "_id" : ObjectId("51ca011bee1709f878753700"), "student" : 140, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f878753760"), "student" : 172, "type" : "essay
+", "score" : 96 }
+{ "_id" : ObjectId("51ca011bee1709f8787537a8"), "student" : 196, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f8787537d5"), "student" : 211, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f8787538cb"), "student" : 293, "type" : "essay
+", "score" : 96 }
+{ "_id" : ObjectId("51ca011bee1709f8787539a3"), "student" : 365, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f8787539f1"), "student" : 391, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f878753a2d"), "student" : 411, "type" : "essay
+", "score" : 96 }
+{ "_id" : ObjectId("51ca011bee1709f878753a54"), "student" : 424, "type" : "essay
+", "score" : 96 }
+{ "_id" : ObjectId("51ca011bee1709f878753ac6"), "student" : 462, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f878753ba4"), "student" : 536, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f878753bd4"), "student" : 552, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f878753c1c"), "student" : 576, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f878753c85"), "student" : 611, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f878753d03"), "student" : 653, "type" : "essay
+", "score" : 96 }
+{ "_id" : ObjectId("51ca011bee1709f878753f91"), "student" : 871, "type" : "essay
+", "score" : 96 }
+{ "_id" : ObjectId("51ca011bee1709f878753fa0"), "student" : 876, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f878754003"), "student" : 909, "type" : "essay
+", "score" : 96 }
+{ "_id" : ObjectId("51ca011bee1709f878754069"), "student" : 943, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f878754084"), "student" : 952, "type" : "essay
+", "score" : 97 }
+Type "it" for more
+> db.scores.find( {"score": { $gt : 95 ,$lte : 98 }, "type": "essay" })
+{ "_id" : ObjectId("51ca011bee1709f8787536d0"), "student" : 124, "type" : "essay
+", "score" : 98 }
+{ "_id" : ObjectId("51ca011bee1709f878753700"), "student" : 140, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f878753760"), "student" : 172, "type" : "essay
+", "score" : 96 }
+{ "_id" : ObjectId("51ca011bee1709f8787537a8"), "student" : 196, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f8787537d5"), "student" : 211, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f8787538cb"), "student" : 293, "type" : "essay
+", "score" : 96 }
+{ "_id" : ObjectId("51ca011bee1709f8787538f2"), "student" : 306, "type" : "essay
+", "score" : 98 }
+{ "_id" : ObjectId("51ca011bee1709f8787539a3"), "student" : 365, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f8787539f1"), "student" : 391, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f878753a2d"), "student" : 411, "type" : "essay
+", "score" : 96 }
+{ "_id" : ObjectId("51ca011bee1709f878753a3f"), "student" : 417, "type" : "essay
+", "score" : 98 }
+{ "_id" : ObjectId("51ca011bee1709f878753a54"), "student" : 424, "type" : "essay
+", "score" : 96 }
+{ "_id" : ObjectId("51ca011bee1709f878753ac6"), "student" : 462, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f878753b20"), "student" : 492, "type" : "essay
+", "score" : 98 }
+{ "_id" : ObjectId("51ca011bee1709f878753ba4"), "student" : 536, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f878753bd4"), "student" : 552, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f878753be0"), "student" : 556, "type" : "essay
+", "score" : 98 }
+{ "_id" : ObjectId("51ca011bee1709f878753c1c"), "student" : 576, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f878753c85"), "student" : 611, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f878753c9d"), "student" : 619, "type" : "essay
+", "score" : 98 }
+Type "it" for more
+> db.scores.find( {"score": { $gte : 95 ,$lte : 98 }, "type": "essay" })
+{ "_id" : ObjectId("51ca011bee1709f8787536d0"), "student" : 124, "type" : "essay
+", "score" : 98 }
+{ "_id" : ObjectId("51ca011bee1709f878753700"), "student" : 140, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f878753760"), "student" : 172, "type" : "essay
+", "score" : 96 }
+{ "_id" : ObjectId("51ca011bee1709f8787537a8"), "student" : 196, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f8787537d5"), "student" : 211, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f8787538cb"), "student" : 293, "type" : "essay
+", "score" : 96 }
+{ "_id" : ObjectId("51ca011bee1709f8787538f2"), "student" : 306, "type" : "essay
+", "score" : 98 }
+{ "_id" : ObjectId("51ca011bee1709f878753973"), "student" : 349, "type" : "essay
+", "score" : 95 }
+{ "_id" : ObjectId("51ca011bee1709f8787539a3"), "student" : 365, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f8787539f1"), "student" : 391, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f878753a2a"), "student" : 410, "type" : "essay
+", "score" : 95 }
+{ "_id" : ObjectId("51ca011bee1709f878753a2d"), "student" : 411, "type" : "essay
+", "score" : 96 }
+{ "_id" : ObjectId("51ca011bee1709f878753a3f"), "student" : 417, "type" : "essay
+", "score" : 98 }
+{ "_id" : ObjectId("51ca011bee1709f878753a54"), "student" : 424, "type" : "essay
+", "score" : 96 }
+{ "_id" : ObjectId("51ca011bee1709f878753ac6"), "student" : 462, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f878753b1d"), "student" : 491, "type" : "essay
+", "score" : 95 }
+{ "_id" : ObjectId("51ca011bee1709f878753b20"), "student" : 492, "type" : "essay
+", "score" : 98 }
+{ "_id" : ObjectId("51ca011bee1709f878753ba4"), "student" : 536, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f878753bd4"), "student" : 552, "type" : "essay
+", "score" : 97 }
+{ "_id" : ObjectId("51ca011bee1709f878753be0"), "student" : 556, "type" : "essay
+", "score" : 98 }
+Type "it" for more
+>
